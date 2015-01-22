@@ -21,8 +21,9 @@ angular.module('starter', ['ionic'])
     .config(function ($stateProvider, $urlRouterProvider) {
       $stateProvider.state('app', {
         url: '/index',
-        templateUrl: '/templates/app.html'
+        templateUrl: '/templates/app.html',
+        controller: 'AppViewCtrl'
       });
 
-      $urlRouterProvider.otherwise('/fail');
+      $urlRouterProvider.otherwise('/index');
     });
