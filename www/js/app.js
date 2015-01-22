@@ -13,7 +13,7 @@ angular.module('starter', ['ionic'])
           cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
         if (window.StatusBar) {
-          StatusBar.styleDefault();
+          StatusBar.hide();
         }
       });
     })
@@ -21,7 +21,7 @@ angular.module('starter', ['ionic'])
     .config(function ($stateProvider, $urlRouterProvider) {
       $stateProvider.state('app', {
         url: '/index',
-        templateUrl: '/templates/app.html',
+        templateUrl: 'templates/app.html',
         controller: 'AppViewCtrl'
       });
 
