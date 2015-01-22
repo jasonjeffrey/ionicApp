@@ -5,3 +5,7 @@ node_modules/
 platforms/
 plugins/
 .idea/
+
+#sass compiled files
+www/css/ionic.app.css
+www/css/ionic.app.min.css
