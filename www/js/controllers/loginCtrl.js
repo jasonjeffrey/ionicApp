@@ -1,5 +1,5 @@
 angular.module('starter')
-    .controller('AppViewCtrl', function ($scope) {
+    .controller('LoginCtrl', function ($scope, $location) {
       $scope.auth = {
         password: ''
       };
@@ -9,7 +9,8 @@ angular.module('starter')
       $scope.login = function () {
         if($scope.auth.password === 'open') {
           $scope.errorMsg = '';
-          //load new view
+
+          $location.url('/camera');
         } else {
           $scope.errorMsg = 'Incorrect Password';
         }

@@ -20,11 +20,17 @@ angular.module('starter', ['ionic'])
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
-      $stateProvider.state('app', {
-        url: '/index',
-        templateUrl: 'templates/app.html',
-        controller: 'AppViewCtrl'
+      $stateProvider.state('login', {
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
       });
 
-      $urlRouterProvider.otherwise('/index');
+      $stateProvider.state('camera', {
+        url: '/camera',
+        templateUrl: 'templates/camera.html',
+        controller: 'CameraCtrl'
+      });
+
+      $urlRouterProvider.otherwise('/login');
     });
