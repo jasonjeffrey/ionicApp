@@ -1,5 +1,9 @@
 angular.module('starter')
-    .controller('LoginCtrl', function ($scope, $location) {
+    .controller('LoginCtrl', function ($scope, $location, $ionicPlatform, $cordovaSplashscreen) {
+      $ionicPlatform.ready(function () {
+        $cordovaSplashscreen.hide();
+      });
+
       $scope.auth = {
         password: ''
       };
@@ -7,12 +11,12 @@ angular.module('starter')
       $scope.errorMsg = '';
 
       $scope.login = function () {
-        if($scope.auth.password === 'open') {
+        if ($scope.auth.password === 'open') {
           $scope.errorMsg = '';
 
           $location.url('/camera');
         } else {
           $scope.errorMsg = 'Incorrect Password';
         }
-      }
+      };
     });
