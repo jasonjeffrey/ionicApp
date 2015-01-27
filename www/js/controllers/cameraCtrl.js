@@ -1,13 +1,16 @@
 angular.module('starter')
     .controller('CameraCtrl', function ($scope, $ionicPlatform, $cordovaCapture) {
+      $scope.imageArray = [];
+
       $scope.loadCamera = function () {
         var options = {limit: 3};
         $cordovaCapture.captureImage(options).then(function (imageData) {
-          // Success! Image data is here
-          console.log('success');
+          var i;
+          for(i = 0; i < imageData.length; i++) {
+            $scope.imageArray.push(imageData[i]);
+          }
         }, function (err) {
-          // An error occurred. Show a message to the user
-          console.log('error');
+          console.log('error', err);
         });
       };
     });

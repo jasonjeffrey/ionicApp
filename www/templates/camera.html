@@ -2,5 +2,8 @@
     <ion-content>
         <h1>camera</h1>
         <button class="button button-positive" ng-click="loadCamera()">load</button>
+        <div class="imgPanel">
+            <img ng-repeat="image in imageArray" ng-src="{{image.fullPath}}" />
+        </div>
     </ion-content>
 </ion-view>

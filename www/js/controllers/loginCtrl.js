@@ -4,9 +4,7 @@ angular.module('starter')
         $cordovaSplashscreen.hide();
       });
 
-      $scope.auth = {
-        password: ''
-      };
+      $scope.auth = {};
 
       $scope.errorMsg = '';
 
