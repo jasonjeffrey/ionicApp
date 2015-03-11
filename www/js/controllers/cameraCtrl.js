@@ -1,15 +1,27 @@
 angular.module('starter')
-    .controller('CameraCtrl', function ($scope, $ionicPlatform, $cordovaCapture) {
+    .controller('CameraCtrl', function ($scope, $ionicPlatform, $cordovaCamera) {
       $scope.imageArray = [];
 
       $scope.loadCamera = function () {
-        var options = {limit: 3};
-        $cordovaCapture.captureImage(options).then(function (imageData) {
-          var i;
-          for(i = 0; i < imageData.length; i++) {
-            $scope.imageArray.push(imageData[i]);
-          }
-        }, function (err) {
+        var options = {
+          quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          allowEdit: true,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 100,
+          targetHeight: 100,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false
+        };
+
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+
+          var src = "data:image/jpeg;base64," + imageData;
+
+          console.log(src);
+
+        }, function(err) {
           console.log('error', err);
         });
       };
