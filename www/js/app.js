@@ -17,7 +17,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
       $stateProvider.state('camera', {
         url: '/camera',
-        templateUrl: 'templates/camera.html',
+        templateUrl: 'templates/gallery.html',
         controller: 'GalleryCtrl'
       });
 

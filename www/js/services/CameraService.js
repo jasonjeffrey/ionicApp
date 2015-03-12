@@ -2,13 +2,15 @@ angular.module('starter')
     .service('cameraService', function ($q, $ionicPlatform, $cordovaCamera) {
         var options = {
             quality: 100,
-            destinationType: Camera.DestinationType.DATA_URL,
-            sourceType: Camera.PictureSourceType.CAMERA,
             allowEdit: true,
-            encodingType: Camera.EncodingType.JPEG,
             saveToPhotoAlbum: false
         };
 
+        $ionicPlatform.ready(function () {
+            options.destinationType = Camera.DestinationType.DATA_URL;
+            options.sourceType = Camera.PictureSourceType.CAMERA;
+            options.encodingType = Camera.EncodingType.JPEG;
+        });
 
         this.getPictureFromCamera = function () {
             var defer = $q.defer();
