@@ -2,14 +2,6 @@ angular.module('starter')
     .controller('GalleryCtrl', function ($scope, cameraService, localStorageService) {
       var galleryStorageKey = 'gallery';
 
-      $scope.imageArray = [];
-      $scope.takePicture = function () {
-        cameraService.getPictureFromCamera().then(function (picture) {
-          $scope.imageArray.push(picture);
-          saveImagesToLocalStorage();
-        });
-      };
-
       function initialiseGallery() {
         $scope.imageArray = getImagesFromLocalStorage();
       }
@@ -27,6 +19,14 @@ angular.module('starter')
 
         return storedImageArray;
       }
+
+      $scope.imageArray = [];
+      $scope.takePicture = function () {
+        cameraService.getPictureFromCamera().then(function (picture) {
+          $scope.imageArray.push(picture);
+          saveImagesToLocalStorage();
+        });
+      };
 
       initialiseGallery();
     });
