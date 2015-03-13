@@ -4,13 +4,12 @@ describe('cameraService', function () {
       $scope;
 
   beforeEach(function () {
-    module('ionic',function ($stateProvider, $urlRouterProvider) {
+    module('ionic', function ($stateProvider, $urlRouterProvider) {
       sinon.stub($stateProvider, 'state');
       sinon.stub($urlRouterProvider, 'otherwise');
     });
 
     module('ngCordova', 'ngCordovaMocks');
-
     module('starter');
   });
 
