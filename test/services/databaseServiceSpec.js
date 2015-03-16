@@ -1,5 +1,5 @@
 describe('databaseService', function () {
-  var databaseService, $cordovaSQLite, $exceptionHandler, q, scope;
+  var databaseService, $cordovaSQLite, $exceptionHandler;
 
   beforeEach(function () {
     module(function($exceptionHandlerProvider) {
