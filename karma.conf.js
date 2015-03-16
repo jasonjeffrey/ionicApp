@@ -19,7 +19,7 @@ module.exports = function(config) {
         'www/lib/ngCordova/dist/ng-cordova-mocks.js',
         'www/lib/ngCordova/dist/ng-cordova.js',
         'node_modules/angular-mocks/angular-mocks.js',
-        'test/device-mocks.js',
+        'test/libs/device-mocks.js',
         'www/js/**/*.js',
         'test/**/*Spec.js'
     ],
