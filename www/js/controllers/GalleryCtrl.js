@@ -25,6 +25,9 @@ angular.module('starter')
         cameraService.getPictureFromCamera().then(function (picture) {
           $scope.imageArray.push(picture);
           saveImagesToLocalStorage();
+        },
+        function (error) {
+          console.log(error);
         });
       };
 

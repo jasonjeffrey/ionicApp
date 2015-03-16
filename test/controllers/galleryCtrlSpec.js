@@ -57,9 +57,10 @@ describe('GalleryCtrl', function () {
   });
 
   describe('takePicture', function () {
-    var cameraService, controller;
+    var q, cameraService, controller;
 
     beforeEach(inject(function (_cameraService_, $q) {
+      q = $q;
       cameraService = _cameraService_;
 
       sinon.stub(localStorageService,'getItem', function () {
@@ -67,14 +68,6 @@ describe('GalleryCtrl', function () {
       });
 
       sinon.stub(localStorageService, 'setItem');
-
-      sinon.stub(cameraService, 'getPictureFromCamera', function () {
-        var defer = $q.defer();
-
-        defer.resolve();
-
-        return defer.promise;
-      });
 
       controller = controllerLoader('GalleryCtrl', {
         $scope: scope
@@ -90,12 +83,40 @@ describe('GalleryCtrl', function () {
 
 
     it('should successfully get a picture from the camera, update imageArray and save to localStorage ', function () {
+      sinon.stub(cameraService, 'getPictureFromCamera', function () {
+        var defer = q.defer();
+
+        defer.resolve();
+
+        return defer.promise;
+      });
+
       scope.$apply(scope.takePicture());
 
       expect(cameraService.getPictureFromCamera.called).to.be.ok;
       expect(scope.imageArray.length).to.equal(1);
       expect(localStorageService.setItem.called).to.be.ok;
       expect(localStorageService.setItem.args[0][0]).to.equal('gallery');
+    });
+
+    it('should fail to get a picture from the camera and console log out an error message ', function () {
+      sinon.stub(cameraService, 'getPictureFromCamera', function () {
+        var defer = q.defer();
+
+        defer.reject();
+
+        return defer.promise;
+      });
+
+      sinon.stub(console, 'log');
+
+      scope.$apply(scope.takePicture());
+
+      expect(cameraService.getPictureFromCamera.called).to.be.ok;
+      expect(scope.imageArray.length).to.equal(0);
+      expect(console.log.calledOnce).to.be.ok;
+
+      console.log.restore();
     });
 
   });
