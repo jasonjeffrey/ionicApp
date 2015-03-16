@@ -1,12 +1,21 @@
 describe('databaseService', function () {
-  var databaseService;
+  var databaseService, $cordovaSQLite, $exceptionHandler, q, scope;
+
+  beforeEach(function () {
+    module(function($exceptionHandlerProvider) {
+      $exceptionHandlerProvider.mode('log');
+    });
+  });
 
   beforeEach(module('starter'));
 
-  beforeEach(inject(function(_databaseService_, _$cordovaSQLite_) {
+  beforeEach(inject(function(_databaseService_, _$cordovaSQLite_, _$exceptionHandler_) {
     databaseService = _databaseService_;
     $cordovaSQLite = _$cordovaSQLite_;
+    $exceptionHandler = _$exceptionHandler_;
   }));
+
+
 
   describe('initialisation', function () {
     it('should not be undefined', function () {
@@ -16,10 +25,6 @@ describe('databaseService', function () {
 
   describe('openConnection', function () {
 
-    beforeEach(function () {
-      sinon.stub($cordovaSQLite, 'openDB');
-    });
-
     afterEach(function () {
       $cordovaSQLite.openDB.restore();
     });
@@ -27,19 +32,25 @@ describe('databaseService', function () {
     it('should open a local database using default background setting', function () {
       var dbName = 'app.db';
 
+        sinon.stub($cordovaSQLite, 'openDB');
+
         databaseService.openConnection(dbName);
 
         expect($cordovaSQLite.openDB.called).to.be.ok;
         expect($cordovaSQLite.openDB.args[0][0]).to.equal(dbName);
     });
 
-    it('should fail to open a local database by not passing a DB name', function () {
-      var dbName = 'error.db';
+    it('should throw error to open a local database by not passing a DB name', function () {
+      var dbException = 'no DB Name';
 
-      databaseService.openDatabase();
+      sinon.stub($cordovaSQLite, 'openDB', function () {
+        throw dbException;
+      });
+
+      databaseService.openConnection();
 
       expect($cordovaSQLite.openDB.called).to.be.ok;
-      expect($cordovaSQLite.openDB.args[0][0]).to.equal(dbName);
+      expect($exceptionHandler.errors[0]).to.equal(dbException);
     });
   });
 });
